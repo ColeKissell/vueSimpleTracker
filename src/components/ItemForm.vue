@@ -1,11 +1,13 @@
 <template>
 <div>
-		<button >create/update Item</button>
-    	<div>
+		<H3>Create or Update Item</H3>
+    	<form>
+            <button >create/update Item</button>
+            <label>Name</label>
             <input type='text' />
-
+            <label>Description</label>
             <input type='text'/>
-		</div>
+		</form>
 	</div>
 </template>
 
@@ -15,12 +17,6 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
     name: 'ItemFormComponent',
-    data() {
-        return {
-            name: null,
-            description: null,
-        }
-    },
     computed:{ 
 		...mapGetters({
 			

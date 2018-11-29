@@ -32,6 +32,7 @@ import ItemForm from './ItemForm'
 
 export default {
   name: 'Items',
+  components: {ItemForm},
   computed:{ 
 		...mapGetters({
 			items: 'getItems',
