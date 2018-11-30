@@ -3,3 +3,9 @@ export const GET_ALL_ITEMS = 'GET_ALL_ITEMS'
 export const UPDATE_SELECTED_ITEM = 'UPDATE_SELECTED_ITEM'
 
 export const SUBMIT = 'SUBMIT'
+
+export const UPDATE_SELECTED_ITEM_NAME = 'UPDATE_SELECTED_ITEM_NAME'
+
+export const UPDATE_SELECTED_ITEM_DESCRIPTION = 'UPDATE_SELECTED_ITEM_DESCRIPTION'
+
+// export const updateField= 'updateField'

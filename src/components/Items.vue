@@ -9,14 +9,7 @@
 
 		    <div>
 		      <div v-for="item in items" v-bind:key="item._id" track-by="_id"> 
-            <!-- need to add a button to access the update form -->
-            <ul>
-              <li>{{item._id}}</li>
-              <li>{{item.name}}</li>
-              <li>{{item.description}}</li>
-            </ul>
-            <hr/>
-            <br/>
+            <display-item></display-item>
 		      </div>
 		    </div>
 		</div>
@@ -27,22 +20,18 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapState } from 'vuex'
 import ItemForm from './ItemForm'
+import DisplayItem from './DisplayItem'
 
 export default {
   name: 'Items',
-  components: {ItemForm},
-  computed:{ 
-		...mapGetters({
-			items: 'getItems',
-		}),
-	},
-	methods:{
-			...mapActions({
-        getItems: 'findItems'
-		})
-	}
+  components: {ItemForm, DisplayItem},
+  data(){
+    return{
+      items:[]
+    }
+  }
 
 }
 </script>
