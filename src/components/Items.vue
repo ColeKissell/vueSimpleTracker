@@ -1,7 +1,7 @@
 <template>
 <div>
 		<h1 class="title">All Items</h1>
-		<button @click='getItems'>Get Items</button>
+		<button>Get Items</button>
     	<div>
 		        <p>Name</p>
 		        <p>Description</p>
@@ -9,7 +9,11 @@
 
 		    <div>
 		      <div v-for="item in items" v-bind:key="item._id" track-by="_id"> 
-            <display-item></display-item>
+            <display-item
+              :_id = item._id
+              :name = item.name
+              :description = item.description
+            ></display-item>
 		      </div>
 		    </div>
 		</div>
@@ -23,7 +27,7 @@
 import { mapGetters, mapActions, mapState } from 'vuex'
 import ItemForm from './ItemForm'
 import DisplayItem from './DisplayItem'
-
+import {getThings} from '../APICalls.js';
 export default {
   name: 'Items',
   components: {ItemForm, DisplayItem},
@@ -31,7 +35,10 @@ export default {
     return{
       items:[]
     }
-  }
+  },
+    async created(){
+        this.items = await getThings();
+    }
 
 }
 </script>

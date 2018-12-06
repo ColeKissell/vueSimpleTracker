@@ -1,9 +1,8 @@
 <template>
 <div>
 		<H3>Create or Update Item</H3>
-        <form @submit.prevent="submitForm()">
-            <button >Create Item</button>
-
+        <form @submit.prevent="submitIt">
+            <button type="submit">Done</button>
             <label>Name</label>
             <input v-model="name"/>
             <p>{{name}}</p>
@@ -18,38 +17,48 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from 'vuex'
-import { mapFields } from 'vuex-map-fields';
+import { newItem, updateItem} from '../APICalls.js';
 
 
 export default {
     name: 'ItemFormComponent',
+       props:[
+            "my_id",
+            "myName",
+            "myDescription"
+        ],
     data(){
         return (
             {
+                _id: '',
                 name: '',
                 description: ''
             }
         )
     },
-
+    created(){
+            this.$data._id = this.$props.my_id,
+            this.$data.name = this.$props.myName,
+            this.$data.description = this.$props.myDescription
+    },
 	methods:{
-		async submitForm(thing){
-            const sendMe = this.$data
-            console.log(sendMe)
-        await fetch('https://hapiapi-nwwwdcogfv.now.sh/item', {
-            method: "POST",
-            mode: "cors",
-            headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            },
-            body: JSON.stringify(sendMe),
-        }).then((response)=> {
-            return response.json();
-        }).then((myJson)=> {return myJson})
+        submitIt(){
+            if(this.$data._id){
+                this.submitEdit()
+            }else{
+                this.submitNew()
+            }
+        },
+        submitNew(){
+            const newThing = newItem(this.$data)
+            console.log(newThing)
+        },
+        submitEdit(){
+            const updatedThing = updateItem(this.$data)
         }
-        
+
     }
+
 }
 </script>
 

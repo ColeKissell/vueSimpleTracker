@@ -1,13 +1,19 @@
 <template>
+
     <div>
             <ul>
                 <p>Id:</p>
-                <li>{{item._id}}</li>
+                <li>{{_id}}</li>
                 <p>Name:</p>
-                <li>{{item.name}}</li>
+                <li>{{name}}</li>
                 <p>Description:</p>
-                <li>{{item.description}}</li>
-                <button @click="getItemById">pick me</button>
+                <li>{{description}}</li>
+                <ItemForm
+                    :my_id=_id
+                    :myName=name
+                    :myDescription=description
+                ></ItemForm>
+                <button v-on:click.prevent="deleteThing">DELETE</button>
             </ul>
             <hr/>
             <br/>
@@ -15,13 +21,27 @@
 </template>
 
 <script>
+import { string } from 'prop-types';
+import ItemForm from './ItemForm'
+import { deleteItem} from '../APICalls.js';
+
+
     export default {
         name: 'DisplayItem',
-        props: {
-                    id: '',
-                    name: '',
-                    description: ''
+        components: {ItemForm},
+        props:[
+            "_id",
+            "name",
+            "description"
+        ],
+
+        methods:{
+            deleteThing(){
+                console.log(this.$props._id)
+                const deletedThing = deleteItem(this.$props._id)
+                console.log(deletedThing)
+            }
         }
-    
+
     }
 </script>
